@@ -1,0 +1,17 @@
+version: '3.0'
+services:
+  server-app:
+    build: ./hello-server
+    image: devops-practice-server-app
+    ports:
+      - "8080:8080"
+
+  nginx:
+    build: ./nginx
+    image: devops-practice-nginx
+    ports:
+      - "80:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - server-app
